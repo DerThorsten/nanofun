@@ -15,7 +15,7 @@ set(NANOGUI_INSTALL       OFF CACHE BOOL " " FORCE)
 
 #Add the configurations from nanogui
 add_subdirectory(nanogui)# For reliability of parallel build, make the NanoGUI targets dependencies
-#set_property(TARGET glfw glfw_objects nanogui PROPERTY FOLDER "dependencies")
+set_property(TARGET glfw glfw_objects nanogui PROPERTY FOLDER "dependencies")
 
 #Disable building extras we won't need (pure C++ project)
 set(NANOGUI_BUILD_EXAMPLE OFF CACHE BOOL " " FORCE)
@@ -32,12 +32,12 @@ include_directories(${NANOGUI_EXTRA_INCS})
 
 add_executable(index main.cpp)
 
-add_link_options("-o index.html")
+#add_link_options("-o index.html")
 message(STATUS ${NANOGUI_EXTRA_LIBS} )
 message(${NANOGUI_EXTRA_LIBS} STATUS)
 SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 
 
-set_target_properties(index PROPERTIES LINK_FLAGS "-o index.html-s -s DISABLE_EXCEPTION_CATCHING=0")
+set_target_properties(index PROPERTIES LINK_FLAGS "-o index.html  -s DISABLE_EXCEPTION_CATCHING=0")
 
 target_link_libraries(index nanogui ${NANOGUI_EXTRA_LIBS})
