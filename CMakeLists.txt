@@ -8,10 +8,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -Wno-missing-bra
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++17")
 
 
-
-#set(EMCC_LINKER_FLAGS "--emrun -s FETCH=1")
-
-
 #Disable building extras we won't need (pure C++ project)
 set(NANOGUI_BUILD_EXAMPLE OFF CACHE BOOL " " FORCE)
 set(NANOGUI_BUILD_PYTHON  OFF CACHE BOOL " " FORCE)
@@ -36,7 +32,12 @@ include_directories(${NANOGUI_EXTRA_INCS})
 
 add_executable(index main.cpp)
 
-add_link_options("SHELL: --html")
+add_link_options("-o index.html")
 message(STATUS ${NANOGUI_EXTRA_LIBS} )
 message(${NANOGUI_EXTRA_LIBS} STATUS)
+SET(CMAKE_EXECUTABLE_SUFFIX ".html")
+
+
+set_target_properties(index PROPERTIES LINK_FLAGS "-o index.html-s -s DISABLE_EXCEPTION_CATCHING=0")
+
 target_link_libraries(index nanogui ${NANOGUI_EXTRA_LIBS})
