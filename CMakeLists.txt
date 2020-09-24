@@ -5,8 +5,7 @@ project(nanofun)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -Wno-missing-braces")
 
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -s USE_SDL=2 -std=c++17")
-#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/index.html DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++17")
 
 
 
@@ -37,7 +36,7 @@ include_directories(${NANOGUI_EXTRA_INCS})
 
 add_executable(index main.cpp)
 
-add_link_options("SHELL:-s FETCH=1  -s ALLOW_MEMORY_GROWTH=1  -s LLD_REPORT_UNDEFINED -s ERROR_ON_UNDEFINED_SYMBOLS=0 --emrun --html")
+add_link_options("SHELL: --html")
 message(STATUS ${NANOGUI_EXTRA_LIBS} )
 message(${NANOGUI_EXTRA_LIBS} STATUS)
 target_link_libraries(index nanogui ${NANOGUI_EXTRA_LIBS})
